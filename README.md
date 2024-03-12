@@ -1,6 +1,6 @@
 # Ant Design Pro
 
-This project is the frontend of [JobManagement](https://dev.azure.com/M365FleetAGC/Core/_git/JobManagement). It is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+This project is the frontend of [JobManagement](https://dev.azure.com/M365FleetAGC/Core/_git/JobManagement) and initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
 
 ## Environment Prepare
 
