@@ -1,20 +1,57 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Ant Design Pro
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This project is the frontend of [JobManagement](https://dev.azure.com/M365FleetAGC/Core/_git/JobManagement). It is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Environment Prepare
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Install `node_modules`:
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn
+```
+
+## Provided Scripts
+
+Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+
+Scripts provided in `package.json`. It's safe to modify or add additional script:
+
+### Start project
+
+```bash
+npm start
+```
+
+### Build project
+
+```bash
+npm run build
+```
+
+### Check code style
+
+```bash
+npm run lint
+```
+
+You can also use script to auto fix some lint error:
+
+```bash
+npm run lint:fix
+```
+
+### Test code
+
+```bash
+npm test
+```
+
+## More
+
+You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
