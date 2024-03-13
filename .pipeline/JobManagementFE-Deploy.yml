@@ -14,6 +14,8 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  appservicedeploy.retrytimeout: 20
+
 stages:
 - stage: Build
   displayName: Build stage
