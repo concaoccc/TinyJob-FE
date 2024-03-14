@@ -70,6 +70,12 @@ export default [
   //   component: './TableList',
   // },
   {
+    path: '/package',
+    name: 'Package',
+    icon: 'table',
+    component: './Package',
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },

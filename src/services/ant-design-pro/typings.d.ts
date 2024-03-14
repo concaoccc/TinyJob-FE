@@ -98,4 +98,26 @@ declare namespace API {
     description?: string;
     type?: NoticeIconItemType;
   };
+
+  type Owner = {
+    id: number;
+    name: string;
+    pwd: string;
+    email: string;
+    createTime: string;
+    updateTime: string;
+  };
+
+  type PackageListItem = {
+    id: number;
+    name: string;
+    version: string;
+    storageAccount: string;
+    relativePath: string;
+    ownerId: number;
+    owner: Owner;
+    description: string;
+    createTime: string;
+    updateTime: string;
+  };
 }
