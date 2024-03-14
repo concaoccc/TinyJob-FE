@@ -92,34 +92,3 @@ export async function removeRule(options?: { [key: string]: any }) {
     },
   });
 }
-
-/** 获取package列表 GET /api/package */
-export async function getPackage(
-  params: {
-    // query
-    /** 当前的页码 */
-    current?: number;
-    /** 页面的容量 */
-    pageSize?: number;
-  },
-  options?: { [key: string]: any },
-) {
-  return request<API.RuleList>('/api/package', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
-/** add package POST /api/rule */
-export async function addPackage(options?: { [key: string]: any }) {
-  return request<API.PackageListItem>('/api/package', {
-    method: 'POST',
-    data: {
-      method: 'post',
-      ...(options || {}),
-    },
-  });
-}

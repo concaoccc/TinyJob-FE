@@ -1,5 +1,4 @@
-import { addPackage, getPackage } from '@/services/ant-design-pro/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { addPackage, getPackage } from '@/services/package/api';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
   ModalForm,
@@ -10,7 +9,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Button, Drawer, message } from 'antd';
+import { Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 
 /**
@@ -18,7 +17,7 @@ import React, { useRef, useState } from 'react';
  * @zh-CN 添加节点
  * @param fields
  */
-const handleAdd = async (fields: API.PackageListItem) => {
+const handleAdd = async (fields: API.Package) => {
   const hide = message.loading('正在添加');
   try {
     await addPackage({ ...fields });
@@ -42,7 +41,7 @@ const Package: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.PackageListItem>();
+  const [currentRow, setCurrentRow] = useState<API.Package>();
 
   /**
    * @en-US International configuration
@@ -50,7 +49,7 @@ const Package: React.FC = () => {
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<API.PackageListItem>[] = [
+  const columns: ProColumns<API.Package>[] = [
     {
       title: <FormattedMessage id="pages.searchTable.package.id" defaultMessage="Id" />,
       dataIndex: 'id',
@@ -100,13 +99,6 @@ const Package: React.FC = () => {
     },
     {
       title: (
-        <FormattedMessage id="pages.searchTable.package.ownerName" defaultMessage="Owner Name" />
-      ),
-      dataIndex: 'ownerName',
-      valueType: 'textarea',
-    },
-    {
-      title: (
         <FormattedMessage id="pages.searchTable.package.description" defaultMessage="Description" />
       ),
       dataIndex: 'description',
@@ -132,7 +124,7 @@ const Package: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.PackageListItem, API.PageParams>
+      <ProTable<API.Package, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.package.title',
           defaultMessage: 'Package List',
@@ -142,18 +134,18 @@ const Package: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            onClick={() => {
-              handleModalOpen(true);
-            }}
-          >
-            <PlusOutlined />{' '}
-            <FormattedMessage id="pages.searchTable.upload" defaultMessage="Upload" />
-          </Button>,
-        ]}
+        // toolBarRender={() => [
+        //   <Button
+        //     type="primary"
+        //     key="primary"
+        //     onClick={() => {
+        //       handleModalOpen(true);
+        //     }}
+        //   >
+        //     <PlusOutlined />{' '}
+        //     <FormattedMessage id="pages.searchTable.upload" defaultMessage="Upload" />
+        //   </Button>,
+        // ]}
         request={getPackage}
         columns={columns}
       />
@@ -167,7 +159,7 @@ const Package: React.FC = () => {
         open={createModalOpen}
         onOpenChange={handleModalOpen}
         onFinish={async (value) => {
-          const success = await handleAdd(value as API.PackageListItem);
+          const success = await handleAdd(value as API.Package);
           if (success) {
             handleModalOpen(false);
             if (actionRef.current) {
@@ -257,7 +249,7 @@ const Package: React.FC = () => {
         closable={false}
       >
         {currentRow?.name && (
-          <ProDescriptions<API.PackageListItem>
+          <ProDescriptions<API.Package>
             column={2}
             title={currentRow?.name}
             request={async () => ({
@@ -266,7 +258,7 @@ const Package: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<API.PackageListItem>[]}
+            columns={columns as ProDescriptionsItemProps<API.Package>[]}
           />
         )}
       </Drawer>

@@ -39,7 +39,7 @@ export default defineConfig({
   theme: {
     // 如果不想要 configProvide 动态设置主题需要把这个设置为 default
     // 只有设置为 variable， 才能使用 configProvide 动态设置主色调
-    'root-entry-name': 'variable',
+    'root-entry-name': 'default',
   },
   /**
    * @name moment 的国际化配置
@@ -150,6 +150,16 @@ export default defineConfig({
   ],
   mfsu: {
     strategy: 'normal',
+  },
+  scripts: [
+    'https://unpkg.com/react@18/umd/react.production.min.js',
+    'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
+    'https://unpkg.com/@ant-design/charts@1.0.5/dist/charts.min.js',
+  ],
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    '@ant-design/charts': 'charts',
   },
   esbuildMinifyIIFE: true,
   requestRecord: {},

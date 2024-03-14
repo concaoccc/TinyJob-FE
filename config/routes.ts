@@ -29,50 +29,21 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/pkgmgt',
-    name: 'pkgmgt',
-    icon: 'GiftFilled',
+    path: '/scheduler',
+    name: 'Scheduler',
+    icon: 'ScheduleOutlined',
     component: './Welcome',
   },
   {
-    path: '/schedulermgt',
-    name: 'schedulermgt',
-    icon: 'CaretRightOutlined',
+    path: '/job',
+    name: 'Job',
+    icon: 'CodeOutlined',
     component: './Welcome',
   },
-  {
-    path: '/taskmgt',
-    name: 'taskmgt',
-    icon: 'UnorderedListOutlined',
-    component: './Welcome',
-  },
-  // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   routes: [
-  //     {
-  //       path: '/admin',
-  //       redirect: '/admin/sub-page',
-  //     },
-  //     {
-  //       path: '/admin/sub-page',
-  //       name: 'sub-page',
-  //       component: './Admin',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'list.table-list',
-  //   icon: 'table',
-  //   path: '/list',
-  //   component: './TableList',
-  // },
   {
     path: '/package',
     name: 'Package',
-    icon: 'table',
+    icon: 'AppstoreOutlined',
     component: './Package',
   },
   {
