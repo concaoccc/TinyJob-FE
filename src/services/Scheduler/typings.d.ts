@@ -4,13 +4,13 @@ declare namespace API {
     name: string;
     type: string;
     packageId: number;
-    package: Package;
+    package: string;
     version: string;
     assemblyName: string;
     namespace: string;
     className: string;
     executionPlan: string;
-    ExecutionParams: string;
+    executionParams: string;
     createTime: string;
     updateTime: string;
   };

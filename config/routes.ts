@@ -32,7 +32,7 @@ export default [
     path: '/scheduler',
     name: 'Scheduler',
     icon: 'ScheduleOutlined',
-    component: './Welcome',
+    component: './Scheduler',
   },
   {
     path: '/job',

@@ -1,8 +1,8 @@
 export default {
   'menu.welcome': 'Home',
-  'menu.pkgmgt': 'Package',
-  'menu.schedulermgt': 'Scheduler',
-  'menu.taskmgt': 'Task',
+  'menu.Package': 'Package',
+  'menu.Scheduler': 'Scheduler',
+  'menu.Job': 'Task',
 
   'menu.more-blocks': 'More Blocks',
   'menu.admin': 'Admin',
