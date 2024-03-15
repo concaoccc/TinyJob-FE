@@ -1,4 +1,5 @@
 import { addPackage, getPackage } from '@/services/package/api';
+import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
   ModalForm,
@@ -9,7 +10,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Drawer, message } from 'antd';
+import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 
 /**
@@ -131,21 +132,19 @@ const Package: React.FC = () => {
         })}
         actionRef={actionRef}
         rowKey="key"
-        search={{
-          labelWidth: 120,
-        }}
-        // toolBarRender={() => [
-        //   <Button
-        //     type="primary"
-        //     key="primary"
-        //     onClick={() => {
-        //       handleModalOpen(true);
-        //     }}
-        //   >
-        //     <PlusOutlined />{' '}
-        //     <FormattedMessage id="pages.searchTable.upload" defaultMessage="Upload" />
-        //   </Button>,
-        // ]}
+        search={false}
+        toolBarRender={() => [
+          <Button
+            type="primary"
+            key="primary"
+            onClick={() => {
+              handleModalOpen(true);
+            }}
+          >
+            <PlusOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.upload" defaultMessage="Upload" />
+          </Button>,
+        ]}
         request={getPackage}
         columns={columns}
       />
