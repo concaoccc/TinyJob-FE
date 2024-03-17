@@ -2,19 +2,19 @@
 /* eslint-disable */
 
 declare namespace API {
-  type Job = {
+  type Task = {
     id: number;
     name: string;
     type: string;
-    schedulerId: number;
+    schedulerName: string;
     scheduler: Scheduler;
     status: string;
     scheduledExecutionTime: string;
     actualExecutionTime: string;
   };
 
-  type JobList = {
-    data?: Job[];
+  type TaskList = {
+    data?: Task[];
     /** 列表的内容总数 */
     total?: number;
     success?: boolean;

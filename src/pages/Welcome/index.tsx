@@ -1,3 +1,4 @@
+import { getSummary } from '@/services/summary/api';
 import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
@@ -5,14 +6,13 @@ import React from 'react';
 import InfoCard from './InfoCard';
 import MultiLinesForm from './MultiLinesForm';
 
+const summary = (await getSummary(7)) as API.Summary;
+
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
-  const totalTask = 1000;
-  const totalPackage = 100;
-  const totalSchedulers = 100;
-  const schedulerInstance = 1;
-  const executorInstance = 1;
+  const schedulerInstance: number = 1;
+  const executorInstance: number = 1;
   return (
     <PageContainer>
       <Card
@@ -50,9 +50,9 @@ const Welcome: React.FC = () => {
               gap: 16,
             }}
           >
-            <InfoCard description="Total task number" number={totalTask} />
-            <InfoCard description="Total package number" number={totalPackage} />
-            <InfoCard description="Total schedulers number" number={totalSchedulers} />
+            <InfoCard description="Total task number" number={summary.totalTask} />
+            <InfoCard description="Total package number" number={summary.totalPackage} />
+            <InfoCard description="Total schedulers number" number={summary.totalScheduler} />
             <InfoCard description="Sechulder instance number" number={schedulerInstance} />
             <InfoCard description="Executor instance number" number={executorInstance} />
           </div>

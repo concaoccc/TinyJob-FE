@@ -20,8 +20,8 @@ import {
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
-import type { FormValueType } from './components/UpdateForm';
-import UpdateForm from './components/UpdateForm';
+import type { FormValueType } from './components/updateForm';
+import UpdateForm from './components/updateForm';
 
 /**
  * @en-US Add Scheduler
@@ -118,12 +118,8 @@ const Scheduler: React.FC = () => {
    * @zh-CN 新建窗口的弹窗
    *  */
   const [createModalOpen, handleModalOpen] = useState<boolean>(false);
-  /**
-   * @en-US The pop-up window of the distribution update window
-   * @zh-CN 分布更新窗口的弹窗
-   * */
-  const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
 
+  const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
@@ -138,114 +134,82 @@ const Scheduler: React.FC = () => {
 
   const columns: ProColumns<API.Scheduler>[] = [
     {
-      title: (
-        <FormattedMessage
-          id="pages.scheduler.updateForm.schedulerName.nameLabel"
-          defaultMessage="Scheduler Name"
-        />
-      ),
-      dataIndex: 'name',
+      title: 'Id',
+      dataIndex: 'id',
       tip: 'The schdduler name is the unique key',
-      render: (dom, entity) => {
-        return (
-          <a
-            onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
-            }}
-          >
-            {dom}
-          </a>
-        );
-      },
     },
     {
-      title: <FormattedMessage id="pages.scheduler.schedulerType" defaultMessage="Type" />,
+      title: 'Name',
+      dataIndex: 'name',
+      sorter: true,
+    },
+    {
+      title: 'Type',
       dataIndex: 'type',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.scheduler.schedulerPackage" defaultMessage="Package" />,
+      title: 'Package',
       dataIndex: 'package',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.scheduler.schedulerVersion" defaultMessage="Version" />,
+      title: 'Versopn',
       dataIndex: 'version',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage
-          id="pages.scheduler.schedulerAssemblyName"
-          defaultMessage="AssemblyName"
-        />
-      ),
+      title: 'AssemblyName',
       dataIndex: 'assemblyName',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage id="pages.scheduler.schedulerNamespace" defaultMessage="Namespace" />
-      ),
+      title: 'Namespace',
       dataIndex: 'namespace',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage id="pages.scheduler.schedulerClassName" defaultMessage="ClassName" />
-      ),
+      title: 'ClassName',
       dataIndex: 'className',
       valueType: 'textarea',
     },
 
     {
-      title: (
-        <FormattedMessage
-          id="pages.scheduler.schedulerExecutionPlan"
-          defaultMessage="ExecutionPlan"
-        />
-      ),
+      title: 'ExecutionPlan',
       dataIndex: 'executionPlan',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage
-          id="pages.scheduler.schedulerExecutionParams"
-          defaultMessage="ExecutionParams"
-        />
-      ),
-      dataIndex: 'executionParams',
-      valueType: 'textarea',
-    },
-    {
-      title: (
-        <FormattedMessage id="pages.scheduler.schedulerCreateTime" defaultMessage="CreateTime" />
-      ),
+      title: 'CreateTime',
       dataIndex: 'createTime',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage id="pages.scheduler.schedulerUpdateTime" defaultMessage="UpdateTime" />
-      ),
+      title: 'UpdateTime',
       dataIndex: 'updateTime',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.scheduler.Option" defaultMessage="Operating" />,
+      title: 'Operating',
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
         <a
-          key="config"
+          key="update"
           onClick={() => {
             handleUpdateModalOpen(true);
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="Configuration" />
+          Update
+        </a>,
+        <a
+          key="delete"
+          onClick={() => {
+            setCurrentRow(record);
+          }}
+        >
+          Delete
         </a>,
       ],
     },
@@ -254,15 +218,10 @@ const Scheduler: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.Scheduler, API.PageParams>
-        headerTitle={intl.formatMessage({
-          id: 'pages.scheduler.title',
-          defaultMessage: 'Scheduler List',
-        })}
+        headerTitle="Scheduler List"
         actionRef={actionRef}
         rowKey="key"
-        search={{
-          labelWidth: 120,
-        }}
+        search={false}
         toolBarRender={() => [
           <Button
             type="primary"

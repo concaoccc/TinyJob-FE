@@ -22,7 +22,6 @@ export async function getScheduler(
   });
 }
 
-/** 更新规则 PUT /api/scheduler */
 export async function updateScheduler(options?: { [key: string]: any }) {
   return request<API.Scheduler>('/api/scheduler', {
     method: 'POST',
@@ -33,7 +32,6 @@ export async function updateScheduler(options?: { [key: string]: any }) {
   });
 }
 
-/** 新建规则 POST /api/scheduler */
 export async function addScheduler(options?: { [key: string]: any }) {
   return request<API.Scheduler>('/api/scheduler', {
     method: 'POST',
@@ -44,7 +42,6 @@ export async function addScheduler(options?: { [key: string]: any }) {
   });
 }
 
-/** 删除规则 DELETE /api/scheduler */
 export async function removeScheduler(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/scheduler', {
     method: 'POST',
@@ -55,7 +52,6 @@ export async function removeScheduler(options?: { [key: string]: any }) {
   });
 }
 
-/** 删除规则 DELETE /api/scheduler */
 export async function stopScheduler(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/scheduler', {
     method: 'POST',

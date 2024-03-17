@@ -29,22 +29,22 @@ export default [
     component: './Welcome',
   },
   {
+    path: '/package',
+    name: 'Package',
+    icon: 'AppstoreOutlined',
+    component: './Package',
+  },
+  {
     path: '/scheduler',
     name: 'Scheduler',
     icon: 'ScheduleOutlined',
     component: './Scheduler',
   },
   {
-    path: '/job',
-    name: 'Job',
+    path: '/task',
+    name: 'Task',
     icon: 'CodeOutlined',
-    component: './Welcome',
-  },
-  {
-    path: '/package',
-    name: 'Package',
-    icon: 'AppstoreOutlined',
-    component: './Package',
+    component: './Task',
   },
   {
     path: '/',

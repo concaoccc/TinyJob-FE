@@ -1,34 +1,48 @@
-import dayjs from 'dayjs';
 import { Request, Response } from 'express';
 import { parse } from 'url';
+import { packgeListDataSource } from './package';
 
-const genList = (current: number, pageSize: number) => {
-  const tableListDataSource: API.Scheduler[] = [];
-
-  for (let i = 0; i < pageSize; i += 1) {
-    const index = (current - 1) * 10 + i;
-    const packageid = Math.floor(Math.random() * 1000);
-    tableListDataSource.push({
-      id: index,
-      name: `Scheduler ${index}`,
-      type: 'Daily',
-      packageId: packageid,
-      package: `Package ${packageid}`,
-      version: 'v1',
-      assemblyName: `HelloPackage${packageid}`,
-      namespace: 'Microsoft',
-      className: 'M365',
-      executionPlan: 'Daily',
-      executionParams: 'Daily',
-      createTime: dayjs().format('YYYY-MM-DD'),
-      updateTime: dayjs().format('YYYY-MM-DD'),
-    });
-  }
-  tableListDataSource.reverse();
-  return tableListDataSource;
-};
-
-let tableListDataSource = genList(1, 100);
+export let schedulerListDataSource: API.Scheduler[] = [
+  {
+    id: 1,
+    name: 'HelloJobScheduler',
+    type: 'Once',
+    packageName: 'HelloJobPackage',
+    package: packgeListDataSource[2],
+    assemblyName: 'JobExample',
+    namespace: 'JobExample',
+    className: 'HelloWorldJob',
+    executionPlan: '',
+    createTime: new Date('03/10/2024 12:00:00').toLocaleString(),
+    updateTime: new Date('03/10/2024 12:00:00').toLocaleString(),
+  },
+  {
+    id: 2,
+    name: 'DeplyJobScheduler',
+    type: 'Cron',
+    packageName: 'DeplyJobPackage',
+    package: packgeListDataSource[4],
+    assemblyName: 'JobExample',
+    namespace: 'JobExample',
+    className: 'DeplyJob',
+    executionPlan: '*/5 * * * *',
+    createTime: new Date('03/11/2024 12:00:00').toLocaleString(),
+    updateTime: new Date('03/14/2024 12:00:00').toLocaleString(),
+  },
+  {
+    id: 1,
+    name: 'EchoJobScheduler',
+    type: 'Cron',
+    packageName: 'EchoJobPackage',
+    package: packgeListDataSource[6],
+    assemblyName: 'JobExample',
+    namespace: 'JobExample',
+    className: 'EchoJob',
+    executionPlan: '1 4 4 * *',
+    createTime: new Date('03/12/2024 12:00:00').toLocaleString(),
+    updateTime: new Date('03/14/2024 12:00:00').toLocaleString(),
+  },
+];
 
 function getScheduler(req: Request, res: Response, u: string) {
   let realUrl = u;
@@ -42,10 +56,30 @@ function getScheduler(req: Request, res: Response, u: string) {
       filter: any;
     };
 
-  let dataSource = [...tableListDataSource].slice(
-    ((current as number) - 1) * (pageSize as number),
-    (current as number) * (pageSize as number),
-  );
+  let dataSource = [...schedulerListDataSource];
+  if (params.filter) {
+    const filter = JSON.parse(params.filter as any) as {
+      [key: string]: string[];
+    };
+    if (Object.keys(filter).length > 0) {
+      dataSource = dataSource.filter((item) => {
+        return (Object.keys(filter) as Array<keyof API.Scheduler>).some((key) => {
+          if (!filter[key]) {
+            return true;
+          }
+          if (filter[key].includes(`${item[key]}`)) {
+            return true;
+          }
+          return false;
+        });
+      });
+    }
+  }
+
+  if (params.name) {
+    dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
+  }
+
   if (params.sorter) {
     const sorter = JSON.parse(params.sorter);
     dataSource = dataSource.sort((prev, next) => {
@@ -70,31 +104,14 @@ function getScheduler(req: Request, res: Response, u: string) {
       return sortNumber;
     });
   }
-  if (params.filter) {
-    const filter = JSON.parse(params.filter as any) as {
-      [key: string]: string[];
-    };
-    if (Object.keys(filter).length > 0) {
-      dataSource = dataSource.filter((item) => {
-        return (Object.keys(filter) as Array<keyof API.Scheduler>).some((key) => {
-          if (!filter[key]) {
-            return true;
-          }
-          if (filter[key].includes(`${item[key]}`)) {
-            return true;
-          }
-          return false;
-        });
-      });
-    }
-  }
 
-  if (params.name) {
-    dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
-  }
+  dataSource = dataSource.slice(
+    ((current as number) - 1) * (pageSize as number),
+    (current as number) * (pageSize as number),
+  );
   const result = {
     data: dataSource,
-    total: tableListDataSource.length,
+    total: schedulerListDataSource.length,
     success: true,
     pageSize,
     current: parseInt(`${params.current}`, 10) || 1,
@@ -126,9 +143,9 @@ function postScheduler(req: Request, res: Response, u: string, b: Request) {
   }
 
   const result = {
-    list: tableListDataSource,
+    list: schedulerListDataSource,
     pagination: {
-      total: tableListDataSource.length,
+      total: schedulerListDataSource.length,
     },
   };
 
